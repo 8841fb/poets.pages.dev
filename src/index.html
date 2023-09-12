@@ -1,0 +1,369 @@
+<html lang="en"><head>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/opbe/federales.club/main/assets/stupidskids.gif">
+    <title>@poetslietoyou</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pathway+Extreme:opsz,wght@8..144,600&display=swap');
+      </style>
+    <style>
+        body {
+            font-family: 'Pathway Extreme', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            margin: 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            height: 100%;
+            width: 100%;
+            display: block;
+            opacity: 0.3;
+        }
+        body {
+            font-family: 'Pathway Extreme', sans-serif;
+            background-color: #2c2c2c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .profile-card {
+            background-color: rgba(20, 20, 20, 0.5); /* use rgba with alpha for transparency */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.226);
+            max-width: 100%; /* alow the card to expand to fit its content */
+        }
+        .profile-icon {
+            font-size: 60px;
+            pointer-events: none;
+            -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+            color: #000000;
+        }
+        .username {
+            font-size: 24px;
+            pointer-events: none;
+            margin-top: 10px;
+            -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+            color: #ffffff;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .links a {
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 10px;
+        }
+        .links a i {
+            font-size: 24px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        #music-player {
+            width: 300px;
+            -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+            margin: 20px auto;
+            text-align: center;
+        }
+        /* style the progress bar and center the time display */
+        #progress-bar-wrapper {
+            background-color: #cccccc69;
+            width: 100%;
+            height: 10px;
+            margin-top: 10px;
+            pointer-events: none;
+            -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            background-color: white;
+            height: 100%;
+            width: 0;
+            -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+            pointer-events: none;
+            transition: width 0.3s;
+        }
+        #current-time {
+            margin-top: 5px;
+            color: white;
+            pointer-events: none;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* adf styles for the rainbow glow text effect */
+.rainbow-text {
+    font-size: 18px;
+    color: #ffffff;
+    -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+    margin-top: 10px;
+    pointer-events: none;
+    display: inline-block;
+}
+
+.rainbow-glow {
+    -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+    pointer-events: none;
+    color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
+}
+
+.overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            animation: fadeOut 5s ease-in-out forwards;
+            z-index: 9999;
+        }
+
+        /* Keyframes animation to fade out the overlay */
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+        .tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #1f1f1f59;
+  border-radius: 20px;
+  border: 2px solid #58585880;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  pointer-events: none;
+  margin: 5px;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+
+    
+    
+}
+
+    </style>
+</head>
+<body>
+    
+    <script>
+        // Wait for the animation to complete and then remove the overlay
+        const overlay = document.querySelector('.overlay');
+        const animationDuration = 5000; // 5 seconds
+
+        setTimeout(() => {
+            overlay.remove(); // Remove the overlay element
+        }, animationDuration);
+    </script>
+    <canvas id="matrixCanvas" width="901" class="running" height="734"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/cmatrix@0.2.0/dist/matrix.js"></script>
+    <script>
+        function init() {
+            matrix(canvas, {
+                chars: ['0', '1'],
+                color: '#9D9DB1',
+                background: 'rgba(9, 9, 59, 0.05)',
+                exit: false,
+                font_size: 20
+            });
+        }
+
+        if ('matchMedia' in window) {
+            var test = matchMedia(`(prefers-reduced-motion: reduce)`);
+            var reduced = test === true || test.matches === true;
+            if (!reduced) {
+                var canvas = document.getElementById('matrixCanvas');
+                init();
+            }
+        } else {
+            var canvas = document.getElementById('matrixCanvas');
+            init();
+        }
+    </script>
+
+    <div class="profile-card">
+        <div class="profile-icon">
+            <img src="https://kony.moe/assets/images/image07.gif?v=2048794d" style="height: 300px; width: 300px;">
+        </div>
+        <div class="username">
+<img class="tag" src="https://github.com/opbe/federales.club/blob/main/assets/verify.png?raw=true" style="width: 30px;">
+            
+            
+            <div class="username">
+<span class="rainbow-text">"You Shouldn't Let <span class="rainbow-glow">Poets Lie to You</span><span>"</span>
+</span></div>
+<div>
+    <span class="tag"><i class="fa-solid fa-cat"></i></span> <span class="tag"><i class="fa-solid fa-wand-sparkles"></i></span> <span class="tag"><i class="fa-solid fa-mug-saucer"></i></span> 
+</div>
+
+        </div>
+        <a href="https://discord.com/users/1149878308767535164" target="_blank">
+            <img src="https://discord.c99.nl/widget/theme-4/1149878308767535164.png" style="  -webkit-user-select: none;  
+            -moz-user-select: none;    
+            -ms-user-select: none;      
+            user-select: none; width: 340px;">
+        </a>
+        <div id="music-player">
+            <audio id="audio-player" src="cute.mp3"></audio>
+            <button id="play-pause-button" style="background: none; border: none; outline: none; font-size: 26px;"><i class="fas fa-play" style="color: white;"></i></button>
+            <div id="progress-bar-wrapper">
+                <div id="progress-bar"></div>
+            </div>
+            <div id="current-time">0:00</div>
+        </div>
+        <div class="links">
+            <a href="https://discord.com/users/1149878308767535164"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/poetslietoyou"><i class="fab fa-telegram"></i></a>
+            <a href="mailto:poetry@crime.su"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio-player');
+        const playPauseButton = document.getElementById('play-pause-button');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTime = document.getElementById('current-time');
+
+        let isPlaying = false;
+
+        playPauseButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.innerHTML = '<i class="fas fa-play" style="color: white;"></i>'; // change to white play icon
+            } else {
+                audio.play();
+                playPauseButton.innerHTML = '<i class="fas fa-pause" style="color: white;"></i>'; // cange to white pause icon
+            }
+            isPlaying = !isPlaying;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const duration = audio.duration;
+            const currentTimeValue = audio.currentTime;
+
+            const minutes = Math.floor(currentTimeValue / 60);
+            const seconds = Math.floor(currentTimeValue % 60);
+            const totalTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            currentTime.textContent = `${totalTime}`;
+
+            const progress = (currentTimeValue / duration) * 100;
+            progressBar.style.width = progress + '%';
+        });
+    </script>
+
+    <script>
+document.addEventListener('contextmenu',(e)=>{
+    e.preventDefault();
+  }
+  );
+  document.onkeydown = function(e) {
+  if(event.keyCode == 123) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+     return false;
+  }
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+     return false;
+  }
+}
+    </script>
+
+    <script>
+$(document).bind("contextmenu",function(e) {
+ e.preventDefault();
+});
+
+$(document).keydown(function(e){
+    if(e.which === 123){
+       return false;
+    }
+});
+    </script>
+
+
+
+<script>
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+function ctrlShiftKey(e, keyCode) {
+  return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+}
+
+document.onkeydown = (e) => {
+  // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+  if (
+    event.keyCode === 123 ||
+    ctrlShiftKey(e, 'I') ||
+    ctrlShiftKey(e, 'J') ||
+    ctrlShiftKey(e, 'C') ||
+    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+  )
+    return false;
+};
+</script>
+
+
+
+<noscript>You must enable JavaScript to see this text.</noscript></body></html>
